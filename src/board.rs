@@ -70,4 +70,32 @@ impl Board {
 
         println!("{}", rows)
     }
+
+    pub fn has_winner(&self) -> Option<Player> {
+
+    }
 }
+
+
+// :row.every(player)
+// O0 O1 O2
+// 10 11 12
+// 20 21 22
+ 
+// 
+// 
+
+// 00 11 22
+// 02 11 20
+// O
+//   0   
+//     0
+
+// 00 01 02
+// 10 11 12
+// 20 21 22
+
+// 0
+// 0
+// 0
+
