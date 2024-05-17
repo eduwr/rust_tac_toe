@@ -9,6 +9,12 @@ pub struct Position {
     pub col: usize,
 }
 
+impl Position {
+    pub fn new(row: usize, col: usize) -> Self {
+        Position { row, col }
+    }
+}
+
 #[derive(Debug)]
 pub struct Board {
     game: [[Option<Player>; 3]; 3],
@@ -19,6 +25,10 @@ impl Board {
         Board {
             game: [[None; 3]; 3],
         }
+    }
+
+    pub fn get_position(&self, row: usize, col: usize) -> Option<Player> {
+        self.game[row][col]
     }
 
     pub fn make_move(&mut self, position: Position, player: Player) -> Result<(), &str> {
@@ -39,5 +49,25 @@ impl Board {
         }
 
         Ok(())
+    }
+
+    pub fn show(&self) {
+        let rows = self
+            .game
+            .iter()
+            .map(|row| {
+                row.iter()
+                    .map(|&col| match col {
+                        None => "   ",
+                        Some(Player::O) => " O ",
+                        Some(Player::X) => " X ",
+                    })
+                    .collect::<Vec<_>>()
+                    .join("|")
+            })
+            .collect::<Vec<_>>()
+            .join("\n-----------\n");
+
+        println!("{}", rows)
     }
 }
