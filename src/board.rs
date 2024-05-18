@@ -1,4 +1,6 @@
-#[derive(Copy, Clone, Debug)]
+const SIZE: usize = 3;
+
+#[derive(Copy, Clone, Debug, PartialEq)]
 pub enum Player {
     O,
     X,
@@ -17,13 +19,13 @@ impl Position {
 
 #[derive(Debug)]
 pub struct Board {
-    game: [[Option<Player>; 3]; 3],
+    game: [[Option<Player>; SIZE]; SIZE],
 }
 
 impl Board {
     pub fn new() -> Self {
         Board {
-            game: [[None; 3]; 3],
+            game: [[None; SIZE]; SIZE],
         }
     }
 
@@ -72,23 +74,66 @@ impl Board {
     }
 
     pub fn has_winner(&self) -> Option<Player> {
+        // row condition met
+        for i in 0..SIZE {
+            println!("{}", i);
 
+            // check winner in the rows
+            match (
+                self.get_position(i, 0),
+                self.get_position(i, 1),
+                self.get_position(i, 2),
+            ) {
+                (Some(p0), Some(p1), Some(p2)) if p0 == p1 && p1 == p2 => return Some(p0),
+                _ => {}
+            }
+
+            // check for a winner along the columns
+            match (
+                self.get_position(0, i),
+                self.get_position(1, i),
+                self.get_position(2, i),
+            ) {
+                (Some(p0), Some(p1), Some(p2)) if p0 == p1 && p1 == p2 => return Some(p0),
+                _ => {}
+            }
+        }
+
+        // Check along the horizontal axis
+        match (
+            self.get_position(0, 0),
+            self.get_position(1, 1),
+            self.get_position(2, 2),
+        ) {
+            (Some(p0), Some(p1), Some(p2)) if p0 == p1 && p1 == p2 => return Some(p0),
+            _ => {}
+        }
+
+        match (
+            self.get_position(0, 2),
+            self.get_position(1, 1),
+            self.get_position(2, 0),
+        ) {
+            (Some(p0), Some(p1), Some(p2)) if p0 == p1 && p1 == p2 => return Some(p0),
+            _ => {}
+        }
+
+        None
     }
 }
-
 
 // :row.every(player)
 // O0 O1 O2
 // 10 11 12
 // 20 21 22
- 
-// 
-// 
+
+//
+//
 
 // 00 11 22
 // 02 11 20
 // O
-//   0   
+//   0
 //     0
 
 // 00 01 02
@@ -98,4 +143,3 @@ impl Board {
 // 0
 // 0
 // 0
-

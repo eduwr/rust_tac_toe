@@ -11,6 +11,8 @@ fn main() {
     println!();
     b.make_move(Position { row: 1, col: 1 }, Player::O).unwrap();
     b.show();
+
+    b.has_winner();
 }
 
 // [[i, j, k], [l, m , n] , [o, p q]]
