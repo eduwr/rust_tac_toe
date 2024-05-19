@@ -6,6 +6,7 @@ pub enum Player {
     X,
 }
 
+#[derive(Copy, Clone)]
 pub struct Position {
     pub row: usize,
     pub col: usize,
@@ -74,10 +75,7 @@ impl Board {
     }
 
     pub fn has_winner(&self) -> Option<Player> {
-        // row condition met
         for i in 0..SIZE {
-            println!("{}", i);
-
             // check winner in the rows
             match (
                 self.get_position(i, 0),
