@@ -3,8 +3,6 @@
 mod board_tests {
     use rust_tac_toe::board::{Board, Player, Position};
 
-    use super::*;
-
     #[test]
     fn should_make_move() {
         let mut board = Board::new();
