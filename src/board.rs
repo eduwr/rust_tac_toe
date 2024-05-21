@@ -6,7 +6,7 @@ pub enum Player {
     X,
 }
 
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Debug)]
 pub struct Position {
     pub row: usize,
     pub col: usize,

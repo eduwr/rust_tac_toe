@@ -1,18 +1,9 @@
 mod board;
 
-use board::{Board, Position, Player};
-
+use rust_tac_toe::tic_tac_toe::TicTacToe;
 
 fn main() {
     println!("Hello, Tic Tac Toe");
-    let mut b = Board::new();
 
-    b.show();
-    println!();
-    b.make_move(Position { row: 1, col: 1 }, Player::O).unwrap();
-    b.show();
-
-    b.has_winner();
+    TicTacToe::start_game();
 }
-
-// [[i, j, k], [l, m , n] , [o, p q]]
