@@ -1,7 +1,7 @@
-use crate::board::{Board, Position};
-use std::{io, num::ParseIntError};
+use crate::board::{self, Board, Player, Position};
+use std::{borrow::Borrow, fmt::Error, io, num::ParseIntError};
 
-fn read_coordinates() -> io::Result<()> {
+fn read_coordinates() -> io::Result<Position> {
     loop {
         println!("input the position separated by comma:");
         let mut input = String::new();
@@ -28,7 +28,7 @@ fn read_coordinates() -> io::Result<()> {
         let pos = Position::new(coord[0].into(), coord[1].into());
 
         println!("You typed: {:?}", pos);
-        return Ok(());
+        return Ok(pos);
     }
 }
 
@@ -43,9 +43,34 @@ impl TicTacToe {
         }
     }
 
-    pub fn start_game() {
-        let _ = read_coordinates();
+    pub fn start_game(&mut self) -> Result<(), &str> {
+        let mut player = Player::O;
+        loop {
+            self.board.show();
+            let winner = self.board.has_winner();
+            if winner.is_some() {
+                println!("Player, {:?} wins", winner.unwrap());
+                return Ok(());
+            }
 
-        // Logic here
+            let coord = read_coordinates();
+
+            if coord.is_err() {
+                continue;
+            }
+
+            let mov = self.board.make_move(coord.unwrap(), player);
+
+            if mov.is_err() {
+                println!("{:?}", mov.err());
+                continue;
+            }
+
+            player = if player == Player::O {
+                Player::X
+            } else {
+                Player::O
+            };
+        }
     }
 }
