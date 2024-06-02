@@ -1,10 +1,17 @@
 mod board;
+mod tic_tac_toe;
 
-use rust_tac_toe::tic_tac_toe::TicTacToe;
+use crate::tic_tac_toe::TicTacToe;
 
 fn main() {
     println!("Hello, Tic Tac Toe");
 
-    let mut game = TicTacToe::new();
-    TicTacToe::start_game(&mut game);
+    match TicTacToe::new().start_game() {
+        Err(v) => {
+            println!("Something went wrong {}", v.to_string())
+        }
+        Ok(()) => {
+            println!("Game Over!")
+        }
+    }
 }

@@ -1,5 +1,6 @@
-use crate::board::{self, Board, Player, Position};
-use std::{borrow::Borrow, fmt::Error, io, num::ParseIntError};
+use std::io;
+
+use crate::board::{Board, Player, Position};
 
 fn read_coordinates() -> io::Result<Position> {
     loop {

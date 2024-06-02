@@ -6,15 +6,9 @@ mod board_tests {
     #[test]
     fn should_make_move() {
         let mut board = Board::new();
-        assert!(board
-            .make_move(Position { col: 0, row: 0 }, Player::X)
-            .is_ok());
-        assert!(board
-            .make_move(Position { col: 1, row: 1 }, Player::O)
-            .is_ok());
-        assert!(board
-            .make_move(Position { col: 0, row: 0 }, Player::X)
-            .is_err());
+        assert!(board.make_move(Position::new(0, 0), Player::X).is_ok());
+        assert!(board.make_move(Position::new(1, 1), Player::O).is_ok());
+        assert!(board.make_move(Position::new(0, 0), Player::X).is_err());
 
         assert_eq!(board.get_position(1, 1), Some(Player::O));
         assert_eq!(board.get_position(0, 0), Some(Player::X));
@@ -33,11 +27,11 @@ mod board_tests {
 
     #[test]
     fn should_get_winner_when_vertical_condition_met() {
-        let vertical_winner = (0..3).map(|i| Position { row: i, col: 1 }).collect();
+        let vertical_winner = (0..3).map(|i| Position::new(i, 1)).collect();
         let vertical_loser = vec![
-            Position { row: 1, col: 0 },
-            Position { row: 1, col: 2 },
-            Position { row: 2, col: 2 },
+            Position::new(1, 0),
+            Position::new(1, 2),
+            Position::new(2, 2),
         ];
 
         let board = build_board((vertical_winner, vertical_loser));
@@ -46,11 +40,11 @@ mod board_tests {
 
     #[test]
     fn should_get_winner_when_horizontal_condition_met() {
-        let horizontal_winner = (0..3).map(|i| Position { row: 0, col: i }).collect();
+        let horizontal_winner = (0..3).map(|i| Position::new(0, i)).collect();
         let horizontal_loser: Vec<Position> = vec![
-            Position { row: 1, col: 0 },
-            Position { row: 1, col: 1 },
-            Position { row: 2, col: 1 },
+            Position::new(1, 0),
+            Position::new(1, 1),
+            Position::new(2, 1),
         ];
 
         let board = build_board((horizontal_winner, horizontal_loser));
@@ -59,11 +53,11 @@ mod board_tests {
 
     #[test]
     fn should_get_winner_when_diagonal_condition_met() {
-        let diagonal_winner = (0..3).map(|i| Position { row: i, col: i }).collect();
+        let diagonal_winner = (0..3).map(|i| Position::new(i, i)).collect();
         let diagonal_loser = vec![
-            Position { row: 0, col: 2 },
-            Position { row: 0, col: 1 },
-            Position { row: 1, col: 0 },
+            Position::new(0, 2),
+            Position::new(0, 1),
+            Position::new(1, 0),
         ];
 
         let board = build_board((diagonal_loser, diagonal_winner));
@@ -72,11 +66,11 @@ mod board_tests {
 
     #[test]
     fn should_get_winner_when_counter_diagonal_condition_met() {
-        let diagonal_winner = (0..3).map(|i| Position { row: i, col: 2 - i }).collect();
+        let diagonal_winner = (0..3).map(|i| Position::new(i, 2 - i)).collect();
         let diagonal_loser = vec![
-            Position { row: 0, col: 0 },
-            Position { row: 0, col: 1 },
-            Position { row: 1, col: 0 },
+            Position::new(0, 0),
+            Position::new(0, 1),
+            Position::new(1, 0),
         ];
 
         let board = build_board((diagonal_loser, diagonal_winner));
@@ -86,14 +80,14 @@ mod board_tests {
     #[test]
     fn should_return_none_when_there_is_no_winner() {
         let player_moves = vec![
-            Position { row: 0, col: 0 },
-            Position { row: 1, col: 1 },
-            Position { row: 0, col: 2 },
+            Position::new(0, 0),
+            Position::new(1, 1),
+            Position::new(0, 2),
         ];
         let opponent_moves = vec![
-            Position { row: 0, col: 1 },
-            Position { row: 1, col: 0 },
-            Position { row: 2, col: 2 },
+            Position::new(0, 1),
+            Position::new(1, 0),
+            Position::new(2, 2),
         ];
 
         let board = build_board((player_moves, opponent_moves));

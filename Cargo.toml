@@ -6,5 +6,5 @@ edition = "2021"
 [dependencies]
 
 [[bin]]
-name = "rust_tac_toe"
+name = "rust_tac_toe_bin"
 path = "src/main.rs"
