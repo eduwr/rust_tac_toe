@@ -21,6 +21,7 @@ This is a simple Tic Tac Toe game implemented in Rust. It allows two players to 
 
 ## Example Gameplay
 
+```txt
 Hello, Tic Tac Toe
    |   |   
 -----------
@@ -46,7 +47,7 @@ You typed: Position { row: 0, col: 0 }
    |   | X 
 Player, O wins
 Game Over!
-
+```
 
 ## TODO
 
