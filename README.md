@@ -37,14 +37,16 @@ You typed: Position { row: 1, col: 1 }
 -----------
    |   | X 
 
+...
+
 input the position separated by comma:
 0,0
-You typed: Position { row: 0, col: 0 }
- O |   |   
+You typed: Position { row: 2, col: 1 }
+ X | O  |   
 -----------
    | O |   
 -----------
-   |   | X 
+   | O | X 
 Player, O wins
 Game Over!
 ```
